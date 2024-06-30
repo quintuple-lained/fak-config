@@ -7,39 +7,39 @@ let virtual_keys' = [
   combo.make 25 [2, 3],   # Q
   combo.make 25 [20, 21], # Z
   combo.make 25 [1, 3],   # SCH
-  combo.make 25 [10, 23],  # SZ
-  combo.make 25 [16, 25], # AE
-  combo.make 25 [18, 25], # OE
-  combo.make 25 [7, 25],  # UE
+  combo.make 25 [11, 28],  # SZ
+  combo.make 25 [17, 29], # AE
+  combo.make 25 [19, 29], # OE
+  combo.make 25 [7, 29],  # UE
   # sym
-  combo.make 25 [27, 28], # SLSH
-  combo.make 25 [26, 27], # MINS
-  combo.make 25 [25, 27], # SEMI
-  combo.make 25 [16, 27], # SEMI vertical
-  combo.make 25 [25, 28], # COLON
-  combo.make 25 [17, 28], # COLON vertical
+  combo.make 25 [24, 25], # SLSH
+  combo.make 25 [23, 24], # MINS
+  combo.make 25 [24, 30], # SEMI
+  combo.make 25 [17, 24], # SEMI vertical
+  combo.make 25 [25, 30], # COLON
+  combo.make 25 [18, 25], # COLON vertical
   # parentheticals
-  combo.make 25 [1, 10],  # {
-  combo.make 25 [2, 11], # [
-  combo.make 25 [3, 12], # (
-  combo.make 25 [4, 13], # <
-  combo.make 25 [5, 14], # >
-  combo.make 25 [6, 15], # )
-  combo.make 25 [7, 16], # ]
-  combo.make 25 [8, 17], # }
+  combo.make 25 [1, 11],  # {
+  combo.make 25 [2, 12], # [
+  combo.make 25 [3, 13], # (
+  combo.make 25 [4, 14], # <
+  combo.make 25 [5, 15], # >
+  combo.make 25 [6, 16], # )
+  combo.make 25 [7, 17], # ]
+  combo.make 25 [8, 18], # }
   # nav
   combo.make 25 [21, 22], # ESC
-  combo.make 25 [26, 28], # ENT
+  combo.make 25 [23, 25], # ENT
   combo.make 25 [6, 7], # BSPC
   combo.make 25 [7, 8], # DEL
   combo.make 25 [6, 8], # C-BSPC
   # caps
-  combo.make 25 [12, 15], # caps word
+  combo.make 25 [13, 16], # caps word
   combo.make 25 [1, 8], # caps lock
 ] in
 
 let virtual_key_count = std.array.length virtual_keys' in
-let key_count = 30 + virtual_key_count in
+let key_count = 32 + virtual_key_count in
 
 # convenience aliases
 # taps
@@ -108,17 +108,19 @@ let make_hrm = fun key_idx =>
 
   let htb_hrm_left = fun eager => htb_hrm_base eager & {
     key_interrupts = [
-          ki.tp, ki.tp, ki.tp, ki.tp, ki.tp,  ki.hr, ki.hr, ki.hr, ki.hr,
-        ki.tr, ki.tr, ki.tr, ki.tr, ki.tr,      ki.hr, ki.hr, ki.hr, ki.hr, ki.hr,
-      ki.tp, ki.tp, ki.tp, ki.tp, ki.hr,  ki.hr,  ki.hr, ki.hr, ki.hr, ki.hr, ki.hr,
+      ki.tp, ki.tp, ki.tp, ki.tp, ki.tp,    ki.hr, ki.hr, ki.hr, ki.hr, ki.hr,
+      ki.tr, ki.tr, ki.tr, ki.tr, ki.tr,    ki.hr, ki.hr, ki.hr, ki.hr, ki.hr,
+             ki.tp, ki.tp, ki.tp,                  ki.hr, ki.hr, ki.hr,
+                    ki.hr, ki.hr, ki.hr,    ki.hr, ki.hr, ki.hr,
     ] @ virtual_interrupts
   } in
 
   let htb_hrm_right = fun eager => htb_hrm_base eager & {
     key_interrupts = [
-          ki.hr, ki.hr, ki.hr, ki.hr, ki.hr,  ki.tp, ki.tp, ki.tp, ki.tp,
-        ki.hr, ki.hr, ki.hr, ki.hr, ki.hr,      ki.tr, ki.tr, ki.tr, ki.tr, ki.tr,
-      ki.hr, ki.hr, ki.hr, ki.hr, ki.hr,  ki.hr,  ki.hr, ki.tp, ki.tp, ki.tp, ki.tp,
+      ki.hr, ki.hr, ki.hr, ki.hr, ki.hr,    ki.tp, ki.tp, ki.tp, ki.tp, ki.tp,
+      ki.hr, ki.hr, ki.hr, ki.hr, ki.hr,    ki.tr, ki.tr, ki.tr, ki.tr, ki.tr,
+             ki.hr, ki.hr, ki.hr,                  ki.tp, ki.tp, ki.tp,
+                    ki.hr, ki.hr, ki.hr,    ki.hr, ki.hr, ki.hr,
     ] @ virtual_interrupts
   } in
 
@@ -127,7 +129,7 @@ let make_hrm = fun key_idx =>
     mdh.ralt, mdh.rsft, mdh.rgui, mdh.lalt, mdh.rctl,
   ] in
 
-  let hrm_key_indices = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17] in
+  let hrm_key_indices = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19] in
 
   if std.array.elem key_idx hrm_key_indices then
     let mod_idx = util.array.index_of key_idx hrm_key_indices in
@@ -198,33 +200,38 @@ let combos_base = [
     let base = fun key_idx => (alphas layouts.APTMAK) |> std.array.at key_idx in
     # ALPHAS
     [
-          kc.ESC,  base 0,  base 1,  base 2,  base 3,      base 4,  base 5,  base 6,  base 7,
-        base 8,  base 9,  base 10, base 11, base 12,         base 13, base 14, base 15, base 16, base 17,
-      thumb 0, base 18, base 19, base 20, thumb 1, media.MUTE, thumb 2, base 21, base 22, base 23, thumb 3,
+      tx & hx, base 0,  base 1,  base 2,  base 3,      base 4,  base 5,  base 6,  base 7,  tx & hx,
+      base 8,  base 9,  base 10, base 11, base 12,     base 13, base 14, base 15, base 16, base 17,
+               base 18, base 19, base 20,                       base 21, base 22, base 23,
+                        tx & hx, thumb 0, thumb 1,     thumb 2, thumb 3, tx & hx,
     ] @ combos_base,
     # NUM
     [
-          tx & hx,      tx & hx,      tx & hx,      tx & hx,      tx & hx, tx & hx, kc.N7,   kc.N8,   kc.N9,
-        kc.PPLS & ht, kc.PMNS & ht, kc.PAST & ht, kc.PSLS & ht, tx & ht,       tx & hx, kc.N4,   kc.N5,   kc.N6,   kc.DOT,
-      tt & ht,    kc.N9,      kc.N8,      kc.N7,      tt & ht,          tt,      kc.N0,   kc.N1,   kc.N2,   kc.N3,   kc.E,
+      tx & hx,      tx & hx,      tx & hx,      tx & hx,      tx & hx,   tx & hx, kc.N7,   kc.N8,   kc.N9,   tx & hx,
+      kc.PPLS & ht, kc.PMNS & ht, kc.PAST & ht, kc.PSLS & ht, tx & ht,   tx & hx, kc.N4,   kc.N5,   kc.N6,   kc.DOT,
+                    kc.N9,        kc.N8,        kc.N7,                            kc.N1,   kc.N2,   kc.N3,
+                                  tt & ht,      tt & ht,      tt & ht,   kc.E,    kc.N0,   tt & ht,
     ] @ combos_base,
     # NAV
     [
-          tx & hx,    tx & hx,      tx & hx,      tx & hx,      media.VOLU,         cu.CUT,     cu.COPY,    cu.PSTE,  tx & hx,
-        sk.lctl,    sk.lalt,      sk.lgui,      sk.lsft,      media.VOLD,             media.MUTE, kc.LEFT,    kc.DOWN,  kc.UP,      kc.RGHT,
-      tt & ht,    kc.HOME,      kc.PGDN,      kc.END,       tt & ht,          tt,       tt & ht,    kc.HOME,    kc.PGUP,  kc.END,     tt & ht,
+      tx & hx,    tx & hx,      tx & hx,      tx & hx,      media.VOLU,       cu.CUT,     cu.COPY,    cu.PSTE,  tx & hx,    tx & hx,
+      sk.lctl,    sk.lalt,      sk.lgui,      sk.lsft,      media.VOLD,       media.MUTE, kc.LEFT,    kc.DOWN,  kc.UP,      kc.RGHT,
+                  kc.HOME,      kc.PGDN,      kc.END,                                     kc.HOME,    kc.PGUP,  kc.END,
+                                tt & ht,      tt & ht,      tt & ht,          tt & ht,    tt & ht,   tt & ht,
     ] @ combos_base,
     # SYM
     [
-          tt,      tx & hx, tx & hx, tx & hx, tx & hx, tx & hx, tx & hx, tx & hx, tx & hx,
-        ks.EXLM, ks.AT,   ks.HASH, ks.DLR,  tx & hx,     tx & hx, ks.AMPR, ks.ASTR, ks.PERC, ks.CIRC,
-      ks.TILD, kc.GRV,  ks.DQUO, ks.UNDS, tt & ht,   tt,   tt & ht, kc.BSLS, ks.PIPE, kc.EQL, tt & ht,
+      tt,      tx & hx, tx & hx, tx & hx, tx & hx,   tx & hx, tx & hx, tx & hx, tx & hx, tx & hx,
+      ks.EXLM, ks.AT,   ks.HASH, ks.DLR,  tx & hx,   tx & hx, ks.AMPR, ks.ASTR, ks.PERC, ks.CIRC,
+               kc.GRV,  ks.DQUO, ks.UNDS,                     kc.BSLS, ks.PIPE, kc.EQL,
+                        tt & ht, ks.TILD, tt & ht,   tt & ht, tt & ht, tt & ht,
     ] @ combos_base,
     # FUN
     [
-          tt,      fak.BOOT, tt & ht, tt & ht, tt & ht, tt & ht, kc.F7,   kc.F8,   kc.F8,
-        tt & ht, kc.F12,   kc.F11,  kc.F10,  tt & ht,     tt & ht, kc.F4,   kc.F5,   kc.F6,   tt & ht,
-      tt & ht, kc.F9,    kc.F8,   kc.F7,   tt & ht,   tt,   tt & ht, kc.F1,   kc.F2,   kc.F3,   tt & ht,
+      tt,      fak.BOOT, tt & ht, tt & ht, tt & ht,   tt & ht, kc.F7,   kc.F8,   kc.F8,   tt & ht,
+      tt & ht, kc.F12,   kc.F11,  kc.F10,  tt & ht,   tt & ht, kc.F4,   kc.F5,   kc.F6,   tt & ht,
+               kc.F9,    kc.F8,   kc.F7,                       kc.F1,   kc.F2,   kc.F3,
+                         tt & ht, tt & ht, tt & ht,   tt & ht, tt & ht, tt & ht,
     ] @ combos_base,
   ]
 }
