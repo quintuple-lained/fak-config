@@ -25,6 +25,7 @@ let { tap, ..} = import "fak/keycode.ncl" in
   COLN = tap.reg.ks.RABK,
   UNDS = tap.reg.ks.QUES,
   CIRC = tap.reg.kc.GRV,
+  DEGR = tap.reg.mod.lsft & tap.reg.kc.GRV,
   PIPE = tap.reg.mod.ralt & tap.reg.kc.NUBS,
   LCBR = tap.reg.mod.ralt & tap.reg.kc.N7,
   LPRN = tap.reg.ks.ASTR,

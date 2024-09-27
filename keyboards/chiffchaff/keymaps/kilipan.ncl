@@ -129,7 +129,7 @@ let make_hrm = fun key_idx =>
     mdh.ralt, mdh.rsft, mdh.rgui, mdh.lalt, mdh.rctl,
   ] in
 
-  let hrm_key_indices = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19] in
+  let hrm_key_indices = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17] in
 
   if std.array.elem key_idx hrm_key_indices then
     let mod_idx = util.array.index_of key_idx hrm_key_indices in
