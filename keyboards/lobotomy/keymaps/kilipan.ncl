@@ -39,7 +39,7 @@ let virtual_keys' = [
 ] in
 
 let virtual_key_count = std.array.length virtual_keys' in
-let key_count = 32 + virtual_key_count in
+let key_count = 34 + virtual_key_count in
 
 # convenience aliases
 # taps
@@ -110,8 +110,8 @@ let make_hrm = fun key_idx =>
     key_interrupts = [
       ki.tp, ki.tp, ki.tp, ki.tp, ki.tp,    ki.hr, ki.hr, ki.hr, ki.hr, ki.hr,
       ki.tr, ki.tr, ki.tr, ki.tr, ki.tr,    ki.hr, ki.hr, ki.hr, ki.hr, ki.hr,
-             ki.tp, ki.tp, ki.tp,                  ki.hr, ki.hr, ki.hr,
-                    ki.hr, ki.hr, ki.hr,    ki.hr, ki.hr, ki.hr,
+      ki.tp, ki.tp, ki.tp, ki.tp, ki.tp,    ki.hr, ki.hr, ki.hr, ki.hr, ki.hr,
+                           ki.hr, ki.hr,    ki.hr, ki.hr,
     ] @ virtual_interrupts
   } in
 
@@ -119,8 +119,8 @@ let make_hrm = fun key_idx =>
     key_interrupts = [
       ki.hr, ki.hr, ki.hr, ki.hr, ki.hr,    ki.tp, ki.tp, ki.tp, ki.tp, ki.tp,
       ki.hr, ki.hr, ki.hr, ki.hr, ki.hr,    ki.tr, ki.tr, ki.tr, ki.tr, ki.tr,
-             ki.hr, ki.hr, ki.hr,                  ki.tp, ki.tp, ki.tp,
-                    ki.hr, ki.hr, ki.hr,    ki.hr, ki.hr, ki.hr,
+      ki.hr, ki.hr, ki.hr, ki.hr, ki.hr,    ki.tp, ki.tp, ki.tp, ki.tp, ki.tp,
+                           ki.hr, ki.hr,    ki.hr, ki.hr,
     ] @ virtual_interrupts
   } in
 
@@ -202,36 +202,36 @@ let combos_base = [
     [
       tx & hx, base 0,  base 1,  base 2,  base 3,      base 4,  base 5,  base 6,  base 7,  tx & hx,
       base 8,  base 9,  base 10, base 11, base 12,     base 13, base 14, base 15, base 16, base 17,
-               base 18, base 19, base 20,                       base 21, base 22, base 23,
-                        tx & hx, thumb 0, thumb 1,     thumb 2, thumb 3, tx & hx,
+      tx & hx, base 18, base 19, base 20, tx & hx,     tx & hx, base 21, base 22, base 23, tx & hx,
+                                 thumb 0, thumb 1,     thumb 2, thumb 3,
     ] @ combos_base,
     # NUM
     [
       tx & hx,      tx & hx,      tx & hx,      tx & hx,      tx & hx,   tx & hx, kc.N7,   kc.N8,   kc.N9,   tx & hx,
       kc.PPLS & ht, kc.PMNS & ht, kc.PAST & ht, kc.PSLS & ht, tx & ht,   tx & hx, kc.N4,   kc.N5,   kc.N6,   kc.DOT,
-                    kc.N9,        kc.N8,        kc.N7,                            kc.N1,   kc.N2,   kc.N3,
-                                  tt & ht,      tt & ht,      tt & ht,   kc.E,    kc.N0,   tt & ht,
+      tx & hx,      kc.N9,        kc.N8,        kc.N7,        tx & hx,   tx & hx, kc.N1,   kc.N2,   kc.N3,   tx & hx,
+                                                tt & ht,      tt & ht,   kc.E,    kc.N0,
     ] @ combos_base,
     # NAV
     [
       tx & hx,    tx & hx,      tx & hx,      tx & hx,      media.VOLU,       cu.CUT,     cu.COPY,    cu.PSTE,  tx & hx,    tx & hx,
       sk.lctl,    sk.lalt,      sk.lgui,      sk.lsft,      media.VOLD,       media.MUTE, kc.LEFT,    kc.DOWN,  kc.UP,      kc.RGHT,
-                  kc.HOME,      kc.PGDN,      kc.END,                                     kc.HOME,    kc.PGUP,  kc.END,
-                                tt & ht,      tt & ht,      tt & ht,          tt & ht,    tt & ht,   tt & ht,
+      tx & hx,    kc.HOME,      kc.PGDN,      kc.END,       tx & hx,          tx & hx,    kc.HOME,    kc.PGUP,  kc.END,     tx & hx,
+                                              tt & ht,      tt & ht,          tt & ht,    tt & ht,
     ] @ combos_base,
     # SYM
     [
       tt,      tx & hx, tx & hx, tx & hx, tx & hx,   tx & hx, tx & hx, tx & hx, tx & hx, tx & hx,
       ks.EXLM, ks.AT,   ks.HASH, ks.DLR,  tx & hx,   tx & hx, ks.AMPR, ks.ASTR, ks.PERC, ks.CIRC,
-               kc.GRV,  ks.DQUO, ks.UNDS,                     kc.BSLS, ks.PIPE, kc.EQL,
-                        tt & ht, ks.TILD, tt & ht,   tt & ht, tt & ht, tt & ht,
+      tx & hx, kc.GRV,  ks.DQUO, ks.UNDS, tx & hx,   tx & hx, kc.BSLS, ks.PIPE, kc.EQL,  hx & hx,
+                                 ks.TILD, tt & ht,   tt & ht, tt & ht,
     ] @ combos_base,
     # FUN
     [
       tt,      fak.BOOT, tt & ht, tt & ht, tt & ht,   tt & ht, kc.F7,   kc.F8,   kc.F8,   tt & ht,
       tt & ht, kc.F12,   kc.F11,  kc.F10,  tt & ht,   tt & ht, kc.F4,   kc.F5,   kc.F6,   tt & ht,
-               kc.F9,    kc.F8,   kc.F7,                       kc.F1,   kc.F2,   kc.F3,
-                         tt & ht, tt & ht, tt & ht,   tt & ht, tt & ht, tt & ht,
+      tx & hx, kc.F9,    kc.F8,   kc.F7,   tx & hx,   tx & hx, kc.F1,   kc.F2,   kc.F3,   tx & hx
+                                  tt & ht, tt & ht,   tt & ht, tt & ht,
     ] @ combos_base,
   ]
 }
