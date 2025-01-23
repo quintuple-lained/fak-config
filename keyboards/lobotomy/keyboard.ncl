@@ -1,4 +1,4 @@
-let { RowToColKey, .. } = import "fak/keyboard.ncl" in
+let { ColToRowKey, .. } = import "fak/keyboard.ncl" in
 let { CH552T, .. } = import "fak/mcus.ncl" in
 
 {

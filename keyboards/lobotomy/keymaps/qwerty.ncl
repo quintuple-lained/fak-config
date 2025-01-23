@@ -2,40 +2,7 @@ let { tap, hold, td, combo, macro, ..} = import "fak/keycode.ncl" in
 let util = import "fak/util_functions.ncl" in
 
 let virtual_keys' = [
-  # alpha
-  combo.make 25 [1, 2],   # V
-  combo.make 25 [2, 3],   # Q
-  combo.make 25 [20, 21], # Z
-  combo.make 25 [1, 3],   # SCH
-  combo.make 25 [11, 28],  # SZ
-  combo.make 25 [17, 29], # AE
-  combo.make 25 [19, 29], # OE
-  combo.make 25 [7, 29],  # UE
-  # sym
-  combo.make 25 [24, 25], # SLSH
-  combo.make 25 [23, 24], # MINS
-  combo.make 25 [24, 29], # SEMI
-  combo.make 25 [17, 24], # SEMI vertical
-  combo.make 25 [25, 29], # COLON
-  combo.make 25 [18, 25], # COLON vertical
-  # parentheticals
-  combo.make 25 [1, 11],  # {
-  combo.make 25 [2, 12], # [
-  combo.make 25 [3, 13], # (
-  combo.make 25 [4, 14], # <
-  combo.make 25 [5, 15], # >
-  combo.make 25 [6, 16], # )
-  combo.make 25 [7, 17], # ]
-  combo.make 25 [8, 18], # }
-  # nav
-  combo.make 25 [21, 22], # ESC
-  combo.make 25 [23, 25], # ENT
-  combo.make 25 [6, 7], # BSPC
-  combo.make 25 [7, 8], # DEL
-  combo.make 25 [6, 8], # C-BSPC
-  # caps
-  combo.make 25 [13, 16], # caps word
-  combo.make 25 [1, 8], # caps lock
+  combo.make 50 [0, 9],
 ] in
 
 let virtual_key_count = std.array.length virtual_keys' in
@@ -92,6 +59,7 @@ let sk = {
 let layouts = {
   APTMAK = "WFPBJLUYRSTHKXNAIOCGDM,.",
   APTMAK_DE = "WFPBJLUZRSTHKXNAIOCGDM,.",
+  QWERTY = "QWERTYUIOPASDFGHJKL;ZXCVBNM,./",
 } in
 
 let make_hrm = fun key_idx =>
@@ -125,11 +93,11 @@ let make_hrm = fun key_idx =>
   } in
 
   let hrm_mods = [
-    mdh.lctl, mdh.lalt, mdh.lgui, mdh.lsft, mdh.ralt,
-    mdh.ralt, mdh.rsft, mdh.rgui, mdh.lalt, mdh.rctl,
+    mdh.lgui, mdh.lalt, mdh.lctl, mdh.lsft,
+    mdh.rsft, mdh.rctl, mdh.lalt, mdh.rgui,
   ] in
 
-  let hrm_key_indices = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17] in
+  let hrm_key_indices = [10, 11, 12, 13, 14, 15, 16, 17] in
 
   if std.array.elem key_idx hrm_key_indices then
     let mod_idx = util.array.index_of key_idx hrm_key_indices in
@@ -138,7 +106,7 @@ let make_hrm = fun key_idx =>
 
     mod & hold.reg.behavior (
       (if side == 'left then htb_hrm_left else htb_hrm_right)
-      (if mod == mdh.lgui || mod == mdh.lalt then 'none else 'hold)
+      ('none)
     )
   else
     {}
@@ -162,8 +130,8 @@ let thumb = fun thumb_idx =>
   [
     kc.QUOT & lt 1 & hold.reg.behavior thumb_behavior,
     kc.SPC  & lt 2 & hold.reg.behavior thumb_behavior,
-    kc.E    & lt 3 & hold.reg.behavior thumb_behavior,
-    kc.TAB  & lt 4 & hold.reg.behavior thumb_behavior,    
+    kc.BSPC & lt 3 & hold.reg.behavior thumb_behavior,
+    kc.ENT  & lt 4 & hold.reg.behavior thumb_behavior,    
   ]
   |> std.array.at thumb_idx
 in
@@ -173,36 +141,22 @@ let cu = {
   COPY = md.lctl & kc.INS, # md.lctl & kc.C,
   PSTE = md.lsft & kc.INS, # md.lctl & kc.V,
   CUT  = md.lctl & kc.X,
-  SCH  = macro.make [
-    macro.tap kc.S,
-    macro.release mdh.rsft,
-    macro.tap kc.C,
-    macro.tap kc.H,
-  ],
-  SZ = macro.make [ macro.press mdh.ralt, macro.tap kc.S,    macro.release mdh.ralt, ],
-  AE = macro.make [ macro.press mdh.ralt, macro.tap ks.DQUO, macro.release mdh.ralt, macro.tap kc.A, ],
-  OE = macro.make [ macro.press mdh.ralt, macro.tap ks.DQUO, macro.release mdh.ralt, macro.tap kc.O, ],
-  UE = macro.make [ macro.press mdh.ralt, macro.tap ks.DQUO, macro.release mdh.ralt, macro.tap kc.U, ],
 } in
 
 let combos_base = [
-  kc.V, kc.Q, kc.Z, cu.SCH, cu.SZ, cu.AE, cu.OE, cu.UE,
-  kc.SLSH, kc.MINS, kc.SCLN, kc.SCLN, ks.COLN, ks.COLN,
-  ks.LCBR, kc.LBRC, ks.LPRN, ks.LABK, ks.RABK, ks.RPRN, kc.RBRC, ks.RCBR,
-  kc.ESC, kc.ENT, kc.BSPC, kc.DEL, md.lctl & kc.BSPC,
-  fak.CWTG, kc.CAPS_LOCK,
+  fak.BOOT,
 ] in
 
 ### Keymap itself! ###
 {
   virtual_keys = virtual_keys',
   layers = [
-    let base = fun key_idx => (alphas layouts.APTMAK) |> std.array.at key_idx in
+    let base = fun key_idx => (alphas layouts.QWERTY) |> std.array.at key_idx in
     # ALPHAS
     [
-      kc.V,    base 0,  base 1,  base 2,  base 3,      base 4,  base 5,  base 6,  base 7,  kc.SCLN,
-      base 8,  base 9,  base 10, base 11, base 12,     base 13, base 14, base 15, base 16, base 17,
-      kc.MINS, base 18, base 19, base 20, kc.Q,        kc.Z,    base 21, base 22, base 23, kc.SLSH,
+      base 0,  base 1,  base 2,  base 3,  base 4,      base 5,  base 6,  base 7,  base 8,  base 9,
+      base 10, base 11, base 12, base 13, base 14,     base 15, base 16, base 17, base 18, base 19,
+      base 20, base 21, base 22, base 23, base 24,     base 25, base 26, base 27, base 28, base 29,
                                  thumb 0, thumb 1,     thumb 2, thumb 3,
     ] @ combos_base,
     # NUM
