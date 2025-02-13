@@ -214,10 +214,10 @@ let combos_base = [
     ] @ combos_base,
     # NAV
     [
-      tx & hx,    tx & hx,      tx & hx,      tx & hx,      media.VOLU,       cu.CUT,     cu.COPY,    cu.PSTE,  tx & hx,    tx & hx,
-      sk.lctl,    sk.lalt,      sk.lgui,      sk.lsft,      media.VOLD,       media.MUTE, kc.LEFT,    kc.DOWN,  kc.UP,      kc.RGHT,
-                  kc.HOME,      kc.PGDN,      kc.END,                                     kc.HOME,    kc.PGUP,  kc.END,
-                                tt & ht,      tt & ht,      tt & ht,          tt & ht,    tt & ht,   tt & ht,
+      tx & hx,    tx & hx,      tx & hx,      tx & hx,      media.VOLU,   tx & hx,    tx & hx,    tx & hx,  tx & hx,    tx & hx,
+      sk.lctl,    sk.lalt,      sk.lgui,      sk.lsft,      media.VOLD,   media.MUTE, kc.LEFT,    kc.DOWN,  kc.UP,      kc.RGHT,
+                  cu.COPY,      cu.CUT,       cu.PSTE,                                kc.HOME,    tx & hx,  kc.END,
+                                tt & ht,      tt & ht,      tt & ht,      kc.PGDN,    kc.PGUP,    tt & ht,
     ] @ combos_base,
     # SYM
     [

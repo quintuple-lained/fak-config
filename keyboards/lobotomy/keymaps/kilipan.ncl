@@ -5,19 +5,17 @@ let virtual_keys' = [
   # alpha
   combo.make 25 [1, 2],   # V
   combo.make 25 [2, 3],   # Q
-  combo.make 25 [20, 21], # Z
+  combo.make 25 [21, 22], # Z
   combo.make 25 [1, 3],   # SCH
-  combo.make 25 [11, 28],  # SZ
-  combo.make 25 [17, 29], # AE
-  combo.make 25 [19, 29], # OE
-  combo.make 25 [7, 29],  # UE
+  combo.make 25 [11, 31],  # SZ
+  combo.make 25 [17, 32], # AE
+  combo.make 25 [19, 32], # OE
+  combo.make 25 [7, 32],  # UE
   # sym
-  combo.make 25 [24, 25], # SLSH
-  combo.make 25 [23, 24], # MINS
-  combo.make 25 [24, 29], # SEMI
-  combo.make 25 [17, 24], # SEMI vertical
-  combo.make 25 [25, 29], # COLON
-  combo.make 25 [18, 25], # COLON vertical
+  combo.make 25 [27, 28], # SLSH
+  combo.make 25 [26, 27], # MINS
+  combo.make 25 [27, 32], # SEMI
+  combo.make 25 [28, 32], # COLON
   # parentheticals
   combo.make 25 [1, 11],  # {
   combo.make 25 [2, 12], # [
@@ -28,8 +26,8 @@ let virtual_keys' = [
   combo.make 25 [7, 17], # ]
   combo.make 25 [8, 18], # }
   # nav
-  combo.make 25 [21, 22], # ESC
-  combo.make 25 [23, 25], # ENT
+  combo.make 25 [22, 23], # ESC
+  combo.make 25 [26, 28], # ENT
   combo.make 25 [6, 7], # BSPC
   combo.make 25 [7, 8], # DEL
   combo.make 25 [6, 8], # C-BSPC
@@ -187,7 +185,7 @@ let cu = {
 
 let combos_base = [
   kc.V, kc.Q, kc.Z, cu.SCH, cu.SZ, cu.AE, cu.OE, cu.UE,
-  kc.SLSH, kc.MINS, kc.SCLN, kc.SCLN, ks.COLN, ks.COLN,
+  kc.SLSH, kc.MINS, kc.SCLN, ks.COLN,
   ks.LCBR, kc.LBRC, ks.LPRN, ks.LABK, ks.RABK, ks.RPRN, kc.RBRC, ks.RCBR,
   kc.ESC, kc.ENT, kc.BSPC, kc.DEL, md.lctl & kc.BSPC,
   fak.CWTG, kc.CAPS_LOCK,

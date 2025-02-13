@@ -184,6 +184,16 @@ let thumb = fun thumb_idx =>
   |> std.array.at thumb_idx
 in
 
+let combos_num = [
+  kc.W, kc.M, kc.B, kc.N8, kc.COMMA, kc.DOT,
+        kc.F, kc.P, kc.N7, kc.N9,
+  cu.SCH, kc.Q, kc.K, kc.J, cu.SZ, cu.AE, cu.OE, cu.UE,
+  de.MINS, de.SLSH, de.SCLN, de.COLN,
+  de.LCBR, de.LBRC, de.LPRN, de.LABK, de.RABK, de.RPRN, de.RBRC, de.RCBR,
+  kc.ESC, kc.ENT, kc.BSPC, kc.DEL, md.lctl & kc.BSPC,
+  fak.CWTG, kc.CAPS_LOCK,
+] in
+
 ### Keymap itself! ###
 {
   virtual_keys = virtual_keys',
