@@ -212,10 +212,10 @@ let combos_base = [
     ] @ combos_base,
     # NAV
     [
-                  tx & hx,      tx & hx,      tx & hx,      media.VOLU,   cu.CUT,     cu.COPY,    cu.PSTE,  tx & hx,
+                  tx & hx,      tx & hx,      tx & hx,      media.VOLU,   tx & hx,    tx & hx,    tx & hx,  tx & hx,
       sk.lctl,    sk.lalt,      sk.lgui,      sk.lsft,      media.VOLD,   media.MUTE, kc.LEFT,    kc.DOWN,  kc.UP,      kc.RGHT,
-                  kc.HOME,      kc.PGDN,      kc.END,                                 kc.HOME,    kc.PGUP,  kc.END,
-                                              tt & ht,      tt & ht,      mouse.BTN1, mouse.BTN2,
+                  cu.COPY,      cu.CUT,       cu.PSTE,                                kc.HOME,    tx & hx,  kc.END,
+                                              tt & ht,      tt & ht,      kc.PGDN,    kc.PGUP,
     ] @ combos_base,
     # SYM
     [
@@ -226,7 +226,7 @@ let combos_base = [
     ] @ combos_base,
     # FUN
     [
-               fak.BOOT, tt & ht, tt & ht, tt & ht, tt & ht, kc.F7,   kc.F8,   kc.F8,
+               fak.BOOT, tt & ht, tt & ht, tt & ht, tt & ht, kc.F7,   kc.F8,   kc.F9,
       tt & ht, kc.F12,   kc.F11,  kc.F10,  tt & ht, tt & ht, kc.F4,   kc.F5,   kc.F6,   tt & ht,
                kc.F9,    kc.F8,   kc.F7,                     kc.F1,   kc.F2,   kc.F3,
                                   tt & ht, tt & ht, tt & ht, tt & ht,
