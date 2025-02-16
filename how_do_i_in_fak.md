@@ -3,6 +3,9 @@ How do i do combos?
 you should have something like `let virtual_keys' = [` in your keyboard somewhere,
 there you can define which buttons together make a combo and the combo timeout, lets just say you have a 3x3 matrix, here things would look like this
 
+
+| | | |
+|-|-|-|
 |1|2|3|
 |4|5|6|
 |7|8|9| 
