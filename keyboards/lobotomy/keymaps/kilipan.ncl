@@ -46,7 +46,7 @@ let ks = tap.reg.ks in
 let md = tap.reg.mod in
 # holds
 # let kch = hold.reg.kc in
-# let ksh = hold.reg.ks in
+# let ksh = hold.reg.ks i stuff
 let mdh = hold.reg.mod in
 # sticky key
 let sk' = tap.sticky.mod in
@@ -123,7 +123,7 @@ let make_hrm = fun key_idx =>
   } in
 
   let hrm_mods = [
-    mdh.lctl, mdh.lalt, mdh.lgui, mdh.lsft, mdh.ralt,
+    mdh.lctl, mdh.lalt, mdh.lgui, mdh.lsft & lt 5, mdh.ralt, # try out override approach
     mdh.ralt, mdh.rsft, mdh.rgui, mdh.lalt, mdh.rctl,
   ] in
 
@@ -181,6 +181,13 @@ let cu = {
   AE = macro.make [ macro.press mdh.ralt, macro.tap ks.DQUO, macro.release mdh.ralt, macro.tap kc.A, ],
   OE = macro.make [ macro.press mdh.ralt, macro.tap ks.DQUO, macro.release mdh.ralt, macro.tap kc.O, ],
   UE = macro.make [ macro.press mdh.ralt, macro.tap ks.DQUO, macro.release mdh.ralt, macro.tap kc.U, ],
+  # overrides for comma and dot
+  scln = macro.make [
+    macro.release mdh.lsft, # release shift to be able to
+    macro.tap kc.SCLN,      # type semicolon.
+    macro.press mdh.lsft,   # re-apply shift.
+  ],
+  coln = kc.SCLN,           # shift held means this'll type colon.
 } in
 
 let combos_base = [
@@ -189,6 +196,13 @@ let combos_base = [
   ks.LCBR, kc.LBRC, ks.LPRN, ks.LABK, ks.RABK, ks.RPRN, kc.RBRC, ks.RCBR,
   kc.ESC, kc.ENT, kc.BSPC, kc.DEL, md.lctl & kc.BSPC,
   fak.CWTG, kc.CAPS_LOCK,
+] in
+let combos_trans = [
+  tt & ht, tt & ht, tt & ht, tt & ht, tt & ht, tt & ht, tt & ht, tt & ht,
+  tt & ht, tt & ht, tt & ht, tt & ht,
+  tt & ht, tt & ht, tt & ht, tt & ht, tt & ht, tt & ht, tt & ht, tt & ht,
+  tt & ht, tt & ht, tt & ht, tt & ht, tt & ht,
+  tt & ht, tt & ht,
 ] in
 
 ### Keymap itself! ###
@@ -209,27 +223,34 @@ let combos_base = [
       kc.PPLS & ht, kc.PMNS & ht, kc.PAST & ht, kc.PSLS & ht, tx & ht,   tx & hx, kc.N4,   kc.N5,   kc.N6,   kc.DOT,
       tx & hx,      kc.N9,        kc.N8,        kc.N7,        tx & hx,   tx & hx, kc.N1,   kc.N2,   kc.N3,   tx & hx,
                                                 tt & ht,      tt & ht,   kc.E,    kc.N0,
-    ] @ combos_base,
+    ] @ combos_trans,
     # NAV
     [
       tx & hx,    tx & hx,      tx & hx,      tx & hx,      media.VOLU,       cu.CUT,     cu.COPY,    cu.PSTE,  tx & hx,    tx & hx,
       sk.lctl,    sk.lalt,      sk.lgui,      sk.lsft,      media.VOLD,       media.MUTE, kc.LEFT,    kc.DOWN,  kc.UP,      kc.RGHT,
       tx & hx,    kc.HOME,      kc.PGDN,      kc.END,       tx & hx,          tx & hx,    kc.HOME,    kc.PGUP,  kc.END,     tx & hx,
                                               tt & ht,      tt & ht,          tt & ht,    tt & ht,
-    ] @ combos_base,
+    ] @ combos_trans,
     # SYM
     [
       tt,      tx & hx, tx & hx, tx & hx, tx & hx,   tx & hx, tx & hx, tx & hx, tx & hx, tx & hx,
       ks.EXLM, ks.AT,   ks.HASH, ks.DLR,  tx & hx,   tx & hx, ks.AMPR, ks.ASTR, ks.PERC, ks.CIRC,
       tx & hx, kc.GRV,  ks.DQUO, ks.UNDS, tx & hx,   tx & hx, kc.BSLS, ks.PIPE, kc.EQL,  hx & hx,
                                  ks.TILD, tt & ht,   tt & ht, tt & ht,
-    ] @ combos_base,
+    ] @ combos_trans,
     # FUN
     [
       tt,      fak.BOOT, tt & ht, tt & ht, tt & ht,   tt & ht, kc.F7,   kc.F8,   kc.F8,   tt & ht,
       tt & ht, kc.F12,   kc.F11,  kc.F10,  tt & ht,   tt & ht, kc.F4,   kc.F5,   kc.F6,   tt & ht,
       tx & hx, kc.F9,    kc.F8,   kc.F7,   tx & hx,   tx & hx, kc.F1,   kc.F2,   kc.F3,   tx & hx,
                                   tt & ht, tt & ht,   tt & ht, tt & ht,
-    ] @ combos_base,
-  ]
+    ] @ combos_trans,
+    # override
+    [
+      tt & ht, tt & ht, tt & ht, tt & ht, tt & ht,   tt & ht, tt & ht, tt & ht, tt & ht, tt & ht,
+      tt & ht, tt & ht, tt & ht, tt & ht, tt & ht,   tt & ht, tt & ht, tt & ht, tt & ht, tt & ht,
+      tt & ht, tt & ht, tt & ht, tt & ht, tt & ht,   tt & ht, tt & ht, cu.scln, cu.coln, tt & ht,
+                                 tt & ht, tt & ht,   tt & ht, tt & ht,
+    ] @ combos_trans,
+  ],
 }

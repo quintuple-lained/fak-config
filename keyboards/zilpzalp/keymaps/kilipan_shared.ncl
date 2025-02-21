@@ -8,7 +8,7 @@ let paddings = {
 } in
 let base = make_base paddings in
 
-let { alph, numb, navi, symb, func } = base.keymap in
+let { alph, numb, navi, symb, func, over } = base.keymap in
 
 ### default FAK keymap definition
 {
@@ -17,17 +17,14 @@ let { alph, numb, navi, symb, func } = base.keymap in
     # Alpha layer
     alph.fingers @ alph.thumbs @ base.combos_base,
     # Num layer
-    numb.fingers @ numb.thumbs @ base.combos_base,
-    # navv nav
-    navi.fingers @ navi.thumbs @ base.combos_base,
+    numb.fingers @ numb.thumbs @ base.combos_trans,
+    # Nav layer
+    navi.fingers @ navi.thumbs @ base.combos_trans,
     # Sym layer
-    symb.fingers @ symb.thumbs @ base.combos_base,
+    symb.fingers @ symb.thumbs @ base.combos_trans,
     # Fun layer
-    func.fingers @ func.thumbs @ base.combos_base,
-    #          alpha 0,   alpha 1, alpha 2,  alpha 3,  alpha 4,  alpha 5,  alpha 6,  alpha 7,
-    # alpha 8, alpha 9,  alpha 10, alpha 11, alpha 12, alpha 13, alpha 14, alpha 15, alpha 16, alpha 17, 
-    #          alpha 18, alpha 19, alpha 20,                     alpha 21, alpha 22, alpha 23, 
-    #                              thumb 0,  thumb 1,  thumb 2,  thumb 3,  
-    # ] @ base.combos_base,
+    func.fingers @ func.thumbs @ base.combos_trans,
+    # Override layer
+    over.fingers @ over.thumbs @ base.combos_trans,
   ],
 }

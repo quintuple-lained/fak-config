@@ -200,8 +200,8 @@ in
 
 let cu = {
   # copy custom stuff from example
-  COPY = md.lctl & kc.INS, # md.lctl & kc.C,
-  PSTE = md.lsft & kc.INS, # md.lctl & kc.V,
+  COPY = md.lctl & kc.C,
+  PSTE = md.lctl & kc.V,
   CUT  = md.lctl & kc.X,
   SCH  = macro.make [
     macro.tap kc.S,
@@ -209,10 +209,6 @@ let cu = {
     macro.tap kc.C,
     macro.tap kc.H,
   ],
-  # SZ = macro.make [ macro.press mdh.ralt, macro.tap kc.S,    macro.release mdh.ralt, ],
-  # AE = macro.make [ macro.press mdh.ralt, macro.tap ks.DQUO, macro.release mdh.ralt, macro.tap kc.A, ],
-  # OE = macro.make [ macro.press mdh.ralt, macro.tap ks.DQUO, macro.release mdh.ralt, macro.tap kc.O, ],
-  # UE = macro.make [ macro.press mdh.ralt, macro.tap ks.DQUO, macro.release mdh.ralt, macro.tap kc.U, ],
   SZ = kc.MINS,
   AE = kc.QUOT,
   OE = kc.SCLN,
@@ -248,10 +244,10 @@ let combos_base = [
     ] @ combos_base,
     # NAV
     [
-                  tx & hx,      tx & hx,      tx & hx,      media.VOLU,   cu.CUT,     cu.COPY,    cu.PSTE,  tx & hx,
+                  tx & hx,      tx & hx,      tx & hx,      media.VOLU,   tx & hx,    tx & hx,    tx & hx,  tx & hx,
       sk.lctl,    sk.lalt,      sk.lgui,      sk.lsft,      media.VOLD,   media.MUTE, kc.LEFT,    kc.DOWN,  kc.UP,      kc.RGHT,
-                  kc.HOME,      kc.PGDN,      kc.END,                                 kc.HOME,    kc.PGUP,  kc.END,
-                                              tt & ht,      tt & ht,      mouse.BTN1, mouse.BTN2,
+                  cu.COPY,      cu.CUT,       cu.PSTE,                                kc.HOME,    tx & hx,  kc.END,
+                                              tt & ht,      tt & ht,      kc.PGDN,    kc.PGUP,
     ] @ combos_base,
     # SYM
     [

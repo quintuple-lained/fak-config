@@ -22,8 +22,8 @@ let rec make_base' = fun paddings => {
       # sym
       [22, 23], # SLSH
       [21, 22], # MINS
-      [22, 27], # SEMI
-      [23, 27], # COLON
+      [22, 26], # SEMI
+      [23, 26], # COLON
       # parentheticals
       [0, 9],  # {
       [1, 10], # [
@@ -122,9 +122,9 @@ let rec make_base' = fun paddings => {
       key_interrupts = kilipan.padded_hrm_right paddings @ virtual_interrupts
     } in
 
-    # list of hrm
+    # list of hrm, lsft activates layer 5 for key overrides
     let hrm_mods = [
-      mdh.lctl, mdh.lalt, mdh.lgui, mdh.lsft, mdh.ralt,
+      mdh.lctl, mdh.lalt, mdh.lgui, mdh.lsft & lt 5, mdh.ralt,
       mdh.ralt, mdh.rsft, mdh.rgui, mdh.lalt, mdh.rctl,
     ] in
 
@@ -185,6 +185,13 @@ let rec make_base' = fun paddings => {
     AE = macro.make [ macro.press mdh.ralt, macro.tap ks.DQUO, macro.release mdh.ralt, macro.tap kc.A, ],
     OE = macro.make [ macro.press mdh.ralt, macro.tap ks.DQUO, macro.release mdh.ralt, macro.tap kc.O, ],
     UE = macro.make [ macro.press mdh.ralt, macro.tap ks.DQUO, macro.release mdh.ralt, macro.tap kc.U, ],
+    # overrides for lsft+comma=scln and lsft+dot=colon
+    scln = macro.make [
+      macro.release mdh.lsft, # release shift to be able to
+      macro.tap kc.SCLN,      # type semicolon.
+      macro.press mdh.lsft,   # re-apply shift.
+    ],
+    coln = kc.SCLN,           # shift held means this'll type colon.
   },
 
   combos_base = [
@@ -194,9 +201,14 @@ let rec make_base' = fun paddings => {
     kc.ESC, kc.ENT, kc.BSPC, kc.DEL, md.lctl & kc.BSPC,
     fak.CWTG, kc.CAPS_LOCK,
   ],
+  combos_trans = [
+    tt & ht, tt & ht, tt & ht, tt & ht, tt & ht, tt & ht, tt & ht, tt & ht,
+    tt & ht, tt & ht, tt & ht, tt & ht,
+    tt & ht, tt & ht, tt & ht, tt & ht, tt & ht, tt & ht, tt & ht, tt & ht,
+    tt & ht, tt & ht, tt & ht, tt & ht, tt & ht,
+    tt & ht, tt & ht,
+  ],
 
-  # TODO:
-  # add 'hx & tx' to padding positions using kilipan.pad_fingers and kilipan.pad_thumbs!
   ### Keymap itself! ###
   keymap = {
     alph = {
@@ -240,6 +252,15 @@ let rec make_base' = fun paddings => {
                  fak.BOOT, tt & ht, tt & ht, tt & ht, tt & ht, kc.F7,   kc.F8,   kc.F8,
         tt & ht, kc.F12,   kc.F11,  kc.F10,  tt & ht, tt & ht, kc.F4,   kc.F5,   kc.F6,   tt & ht,
                  kc.F9,    kc.F8,   kc.F7,                     kc.F1,   kc.F2,   kc.F3,
+      ] |> (fun x => kilipan.pad_fingers x (hx & tx) paddings),
+      thumbs = [                    tt & ht, tt & ht, tt & ht, tt & ht,
+      ] |> (fun x => kilipan.pad_thumbs x (hx & tx) paddings),
+    },
+    over = {
+      fingers = [
+                 tt & ht, tt & ht, tt & ht, tt & ht,   tt & ht, tt & ht, tt & ht, tt & ht,
+        tt & ht, tt & ht, tt & ht, tt & ht, tt & ht,   tt & ht, tt & ht, tt & ht, tt & ht, tt & ht,
+                 tt & ht, tt & ht, tt & ht,                     tt & ht, cu.scln, cu.coln,
       ] |> (fun x => kilipan.pad_fingers x (hx & tx) paddings),
       thumbs = [                    tt & ht, tt & ht, tt & ht, tt & ht,
       ] |> (fun x => kilipan.pad_thumbs x (hx & tx) paddings),
