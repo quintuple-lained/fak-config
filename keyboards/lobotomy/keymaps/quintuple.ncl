@@ -5,34 +5,34 @@ let virtual_keys' = [
     combo.make 50 [0, 9],
     
     # Row 0L, QW, WF, FP
-    combo.make 0 [0,1],
-    combo.make 1 [1,2],
-    combo.make 2 [2,3],
+    combo.make 0 [0,1], #esc
+    combo.make 1 [1,2], #printscreen
+    combo.make 2 [2,3], #copy
 
     # Row 1L, AR, RS, ST
-    combo.make 3 [10,11],
-    combo.make 4 [11,12],
-    combo.make 5 [12,13],
+    combo.make 3 [10,11], #{
+    combo.make 4 [11,12], #[
+    combo.make 5 [12,13], #(
 
     # Row 2L, ZX, XC, CD
-    combo.make 6 [20,21],
-    combo.make 7 [21,22],
-    combo.make 8 [23,24],
+    combo.make 6 [20,21], #<
+    combo.make 7 [21,22], #=
+    combo.make 8 [23,24], #paste
 
     # Row 0R LU, UY, Y:
-    combo.make 9 [7,8],
-    combo.make 10 [8,9],
-    combo.make 11 [9,10],
+    combo.make 9 [7,8], #home
+    combo.make 10 [8,9], #none
+    combo.make 11 [9,10], #:
 
     # Row 1R NE, EI, IO
-    combo.make 12 [17,18],
-    combo.make 13 [18,19],
-    combo.make 14 [19,20],
+    combo.make 12 [17,18], #)
+    combo.make 13 [18,19], #]
+    combo.make 14 [19,20], #}
 
     # Row 2R H<, <>, >?
-    combo.make 15 [27,28],
-    combo.make 16 [28,29],
-    combo.make 17 [29,30],
+    combo.make 15 [27,28], #END
+    combo.make 16 [28,29], #::
+    combo.make 17 [29,30], #>
 
     
 ] in
@@ -40,12 +40,7 @@ let virtual_keys' = [
 let virtual_key_count = std.array.length virtual_keys' in
 let key_count = 34 + virtual_key_count in 
 
-let cu = {
-    COPY = md.lctl & kc.C,
-    PSTE = md.lctl & kc.V,
-    CUT  = md.lctl & kc.X,
-    KILL = md.lalt & kc.F4,
-}
+
 
 # convenience aliases
 # taps
@@ -67,6 +62,7 @@ let tx = tap.none in
 let tt = tap.trans in
 let hx = hold.none in
 let ht = hold.trans in
+let xx = tap.none & hold.none in
 
 let ki = {
   hp = { decision = 'hold, trigger_on = 'press },
@@ -89,6 +85,13 @@ let cu = {
   CUT  = md.lctl & kc.X,
 } in
 
+let cu = {
+    COPY = md.lctl & kc.C,
+    PSTE = md.lctl & kc.V,
+    CUT  = md.lctl & kc.X,
+    KILL = md.lalt & kc.F4,
+} in
+
 # home row mods
 # hold.reg.behavior is required for all hold-taps!
 # I've added empty ones here for simplicity. See thumb function below for a slightly more involved approach.
@@ -104,6 +107,11 @@ let hrm = {
   I = mdh.rsft & kc.I & hold.reg.behavior {},
   O = mdh.rgui & kc.O & hold.reg.behavior {},
 } in
+
+let double_colon = macro.make [
+  macro.tap kc.COLN
+  macro.tap kc.COLN
+] in
 
 # thumb keys defined here
 # this function maps the numbers 0, 1, 2, 3 to the below behaviors
@@ -126,9 +134,7 @@ in
 {
   # combos and other virtual keys are defined here
   # (careful, changes here require changes above! marked by "#1")
-  virtual_keys = [
-    combo.make 50 [0, 9],
-  ],
+  virtual_keys = virtual_keys',
   layers = [
     # ALPHAS
     [
@@ -138,7 +144,24 @@ in
                                  # thumb keys are defined above in the function "thumb"
                                  thumb 0, thumb 1,     thumb 2, thumb 3,
       # combos:
-      fak.BOOT,
+      kc.ESC,
+      kc.PSCR,
+      cu.COPY,
+      kc."{",
+      kc."[",
+      kc."(",
+      kc."<",
+      kc.EQL,
+      cu.PSTE,
+      kc.home,
+      xx,
+      kc.COLN,
+      kc.")",
+      kc."]",
+      kc."}",
+      kc.END,
+      macro.double_colon,
+      kc.">",
     ],
     # 1
     [
@@ -146,18 +169,46 @@ in
       kc.F5,  kc.F6,    kc.F7,  kc.F8,    xx,          kc.LEFT, kc.DOWN,  kc.UP,    kc.RIGHT, xx,
       kc.F9,  kc.F10,   kc.F11, kc.F12,   xx,          xx,      kc.END,   kc.PGDN,  xx,       xx,
                           tt & ht,  tt & ht,            tt & ht, tt & ht,
-    ]
+      # combos:
+      kc.ESC,
+      kc.PSCR,
+      cu.COPY,
+      kc."{",
+      kc."[",
+      kc."(",
+      kc."<",
+      kc.EQL,
+      cu.PSTE,
+      kc.home,
+      xx,
+      kc.COLN,
+      kc.")",
+      kc."]",
+      kc."}",
+      kc.END,
+      macro.double_colon,
+      kc.">",
+    ],
     # 2
     [
-
-    ]
+      xx, xx, xx, xx, xx,       xx, xx, xx, xx, xx,
+      xx, xx, xx, xx, xx,       xx, xx, xx, xx, xx,
+      xx, xx, xx, xx, xx,       xx, xx, xx, xx, xx,
+      tt & ht,  tt & ht,        tt & ht, tt & ht,
+    ],
     # 3
     [
-
-    ]
+      xx, xx, xx, xx, xx,       xx, xx, xx, xx, xx,
+      xx, xx, xx, xx, xx,       xx, xx, xx, xx, xx,
+      xx, xx, xx, xx, xx,       xx, xx, xx, xx, xx,
+      tt & ht,  tt & ht,        tt & ht, tt & ht,
+    ],
     # 4
     [
-
-    ]
+      xx, xx, xx, xx, xx,       xx, xx, xx, xx, xx,
+      xx, xx, xx, xx, xx,       xx, xx, xx, xx, xx,
+      xx, xx, xx, xx, xx,       xx, xx, xx, xx, xx,
+      tt & ht,  tt & ht,        tt & ht, tt & ht,
+    ],
   ]
 }
