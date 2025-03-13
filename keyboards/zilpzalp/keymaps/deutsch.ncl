@@ -65,36 +65,6 @@ let hx = hold.none in
 let ht = hold.trans in
 
 
-# let de_kc = {
-#   SLSH = ks.AMPR,
-#   MINS = kc.SLSH,
-#   GRV  = ks.PLUS,
-#   SCLN = ks.LABK,
-#   LBRC = md.ralt & kc.N8,
-#   RBRC = md.ralt & kc.N9,
-#   BSLS = md.ralt & kc.MINUS,
-#   EQL  = ks.RPRN,
-#   QUOT = md.lsft & kc.NUHS,
-# } in 
-# let de_ks = {
-#   AT   = md.ralt & kc.Q,
-#   HASH = kc.NUHS,
-#   AMPR = ks.CIRC,
-#   ASTR = ks.RCBR,
-#   TILD = md.ralt & kc.RBRC,
-#   DQUO = ks.AT,
-#   COLN = ks.RABK,
-#   UNDS = ks.QUES,
-#   CIRC = kc.GRV,
-#   PIPE = md.ralt & kc.NUBS,
-#   LCBR = md.ralt & kc.N7,
-#   LPRN = ks.ASTR,
-#   LABK = kc.NUBS,
-#   RABK = md.lsft & kc.NUBS,
-#   RPRN = ks.LPRN,
-#   RCBR = md.ralt & kc.N0,
-# } in
-
 let ki = {
   hp = { decision = 'hold, trigger_on = 'press },
   tp = { decision = 'tap, trigger_on = 'press },
@@ -209,14 +179,10 @@ let cu = {
     macro.tap kc.C,
     macro.tap kc.H,
   ],
-  SZ = kc.MINS,
-  AE = kc.QUOT,
-  OE = kc.SCLN,
-  UE = kc.LBRC,
 } in
 
 let combos_base = [
-  kc.V, kc.Q, kc.Y, cu.SCH, cu.SZ, cu.AE, cu.OE, cu.UE,
+  kc.V, kc.Q, kc.Y, cu.SCH, de.SZ, de.AE, de.OE, de.UE,
   de.SLSH, de.MINS, de.SCLN, de.COLN,
   de.LCBR, de.LBRC, de.LPRN, de.LABK, de.RABK, de.RPRN, de.RBRC, de.RCBR,
   kc.ESC, kc.ENT, kc.BSPC, kc.DEL, md.lctl & kc.BSPC,
