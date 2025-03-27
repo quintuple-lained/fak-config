@@ -241,7 +241,7 @@ let rec make_base' = fun paddings => {
         ks.EXLM, de.AT,   de.HASH, ks.DLR,  tx & hx, tx & hx, de.AMPR, de.ASTR, ks.PERC, de.CIRC,
                  de.GRV,  de.DQUO, de.UNDS,                   de.BSLS, de.PIPE, de.EQL,
       ] |> (fun x => kilipan.pad_fingers x (hx & tx) paddings),
-      thumbs = [                   ks.TILD, tt & ht, tt & ht, tt & ht,
+      thumbs = [                   de.TILD, tt & ht, tt & ht, tt & ht,
       ] |> (fun x => kilipan.pad_thumbs x (hx & tx) paddings),
     },
     func = {
