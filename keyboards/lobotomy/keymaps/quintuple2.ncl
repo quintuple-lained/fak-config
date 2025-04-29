@@ -1,7 +1,7 @@
 let { tap, hold, td, combo, macro, ..} = import "fak/keycode.ncl" in
 
 # add number of combos to physical keys for later use
-let virtual_key_count = 1 in
+let virtual_key_count = std.array.length virtual_keys' in
 let key_count = 34 + virtual_key_count in
 
 # convenience aliases
@@ -90,7 +90,7 @@ in
   # combos and other virtual keys are defined here
   # (careful, changes here require changes above! marked by "#1")
   virtual_keys = [
-        combo.make 50 [0, 9],
+    combo.make 50 [0, 9],
     
     # Row 0L, QW, WF, FP
     combo.make 0 [0,1], #esc
