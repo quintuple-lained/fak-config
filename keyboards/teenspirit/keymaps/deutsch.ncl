@@ -66,7 +66,7 @@ let virtual_keys' = [
   combo.make 25 [1, 9],   # MINUS
   combo.make 25 [6, 12],  # SLSH
   combo.make 25 [12, 17], # SEMI
-  combo.make 25 [13, 17], # COLON
+  combo.make 25 [13, 16], # COLON
   # parentheticals
   combo.make 25 [1, 8],  # {
   combo.make 25 [2, 9],  # [
@@ -109,7 +109,8 @@ let ki = {
 } in
 
 let layouts = {
-  APTMIN = "RSTHNAIOCGDLUZ",
+  APTMIN = "RSTHNAIOCGDLUY",
+  APTMIN_DE = "RSTHNAIOCGDLUZ",
 } in
 
 let make_hrm = fun key_idx =>
@@ -198,7 +199,7 @@ let combos_num = [
 {
   virtual_keys = virtual_keys',
   layers = [
-    let base = fun key_idx => (alphas layouts.APTMIN) |> std.array.at key_idx in
+    let base = fun key_idx => (alphas layouts.APTMIN_DE) |> std.array.at key_idx in
     # ALPHAS
     [
       base 0,  base 1,  base 2,  base 3,  base 4,  base 5,  base 6,  base 7,
@@ -210,11 +211,11 @@ let combos_num = [
       kc.PPLS & ht, kc.PMNS & ht, kc.PAST & ht, kc.PSLS & ht, kc.N4,   kc.N5,   kc.N6,   kc.DOT,
                     kc.N9,        kc.N8,        kc.N7,        kc.N1,   kc.N2,   kc.N3,
                                   tt & ht,      tt & ht,      kc.E,    kc.N0,
-    ] @ combos_base,
+    ] @ combos_num,
     # NAV
     [
-      sk.lctl & ht, sk.lalt & ht, sk.lgui & ht, sk.lsft & ht, kc.LEFT, kc.DOWN, kc.UP,  kc.RGHT,
-                    cu.COPY,      kc.PGDN,      cu.PSTE,      kc.HOME, kc.PGUP, kc.END,
+      sk.lctl & ht, sk.lalt & ht, sk.lgui & ht, sk.lsft & ht, kc.LEFT,    kc.DOWN,    kc.UP,  kc.RGHT,
+                    cu.COPY,      kc.CUT,       cu.PSTE,      kc.HOME,    media.MUTE, kc.END,
                                   tt & ht,      tt & ht,      media.VOLD, media.VOLU,
     ] @ combos_base,
     # SYM

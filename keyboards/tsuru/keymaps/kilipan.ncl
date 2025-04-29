@@ -212,7 +212,7 @@ let combos_base = [
     [
           tx & hx,    tx & hx,      tx & hx,      tx & hx,      media.VOLU,         cu.CUT,     cu.COPY,    cu.PSTE,  tx & hx,
         sk.lctl,    sk.lalt,      sk.lgui,      sk.lsft,      media.VOLD,             media.MUTE, kc.LEFT,    kc.DOWN,  kc.UP,      kc.RGHT,
-      tt & ht,    kc.HOME,      kc.PGDN,      kc.END,       tt & ht,          tt,       tt & ht,    kc.HOME,    kc.PGUP,  kc.END,     tt & ht,
+      tt & ht,    cu.COPY,      cu.CUT,       cu.PSTE,      tt & ht,          tt,       tt & ht,    kc.HOME,    kc.PGUP,  kc.END,     tt & ht,
     ] @ combos_base,
     # SYM
     [

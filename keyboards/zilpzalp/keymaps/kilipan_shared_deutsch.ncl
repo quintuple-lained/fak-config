@@ -1,4 +1,4 @@
-let { make_base, .. } = import "lib/kilipan_base.ncl" in
+let { make_base, .. } = import "lib/kilipan_base_deutsch.ncl" in
 
 let paddings = {
   top = { left = 0, middle = 0, right = 0 },
@@ -24,7 +24,7 @@ let { alph, numb, navi, symb, func, over } = base.keymap in
     symb.fingers @ symb.thumbs @ base.combos_trans,
     # Fun layer
     func.fingers @ func.thumbs @ base.combos_trans,
-    # Override layer
-    over.fingers @ over.thumbs @ base.combos_trans,
+    # Overlay layer
+    over.fingers @ over.thumbs @ base.combos_overlay,
   ],
 }
