@@ -97,8 +97,8 @@ let hrm = {
 
 # Define double_colon as a proper macro
 let double_colon = macro.make [
-  macro.tap kc.COLN,
-  macro.tap kc.COLN
+  macro.tap ks.COLN,
+  macro.tap ks.COLN
 ] in
 
 # Define the actual combo actions
@@ -106,21 +106,21 @@ let combos_base = [
   kc.ESC,            # 0: QW
   kc.PSCR,           # 1: WF
   cu.COPY,           # 2: FP
-  kc."{",            # 3: AR
-  kc."[",            # 4: RS
-  kc."(",            # 5: ST
-  kc."<",            # 6: ZX
-  kc.EQL,            # 7: XC
-  cu.PSTE,           # 8: CD
-  kc.HOME,           # 9: LU
-  xx,                # 10: UY
-  kc.COLN,           # 11: Y:
-  kc.")",            # 12: NE
-  kc."]",            # 13: EI
-  kc."}",            # 14: IO
-  kc.END,            # 15: H<
-  double_colon,      # 16: <>
-  kc.">",            # 17: >?
+  ks.LCBR,           # 3: AR - { (use ks.LCBR for left curly brace)
+  kc.LBRC,           # 4: RS - [ (use kc.LBRC for left bracket)
+  ks.LPRN,           # 5: ST - ( (use ks.LPRN for left parenthesis)
+  ks.LABK,           # 6: ZX - < (use ks.LABK for less than sign)
+  kc.EQL,            # 7: XC - =
+  cu.PSTE,           # 8: CD - paste
+  kc.HOME,           # 9: LU - Home
+  fak.BOOT,                # 10: UY - none
+  ks.COLN,           # 11: Y: - : (use ks.COLN for colon)
+  ks.RPRN,           # 12: NE - ) (use ks.RPRN for right parenthesis)
+  kc.RBRC,           # 13: EI - ] (use kc.RBRC for right bracket)
+  ks.RCBR,           # 14: IO - } (use ks.RCBR for right curly brace)
+  kc.END,            # 15: H< - END
+  double_colon,      # 16: <> - ::
+  ks.RABK,           # 17: >? - > (use ks.RABK for greater than sign)
 ] in
 
 # Create transparent versions for other layers
@@ -183,7 +183,7 @@ in
     [
       tt,      tx & hx, tx & hx, tx & hx, tx & hx,   tx & hx, tx & hx, tx & hx, tx & hx, tx & hx,
       ks.EXLM, ks.AT,   ks.HASH, ks.DLR,  tx & hx,   tx & hx, ks.AMPR, ks.ASTR, ks.PERC, ks.CIRC,
-      tx & hx, kc.GRV,  ks.DQUO, ks.UNDS, tx & hx,   tx & hx, kc.BSLS, ks.PIPE, kc.EQL,  hx & hx,
+      tx & hx, kc.GRV,  ks.DQUO, ks.UNDS, tx & hx,   tx & hx, kc.BSLS, ks.PIPE, kc.EQL,  tx & hx,
                                  ks.TILD, tt & ht,   tt & ht, tt & ht,
     ] @ combos_trans,
   ]
